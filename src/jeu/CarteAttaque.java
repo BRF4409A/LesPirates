@@ -1,14 +1,12 @@
 package jeu;
 
 public class CarteAttaque extends Carte {
-	private static final String TYPE  = "Attaque";
 	
-	public CarteAttaque(String nom, int vie) {
-		super(nom, vie);
+	public CarteAttaque(String nom, int vie, String description) {
+		super(nom, vie, description);
 	}
 	
-	@Override
-	public String donnerType() {
-		return TYPE;
+	public String getType() {
+		return "attaque";
 	}
 }

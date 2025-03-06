@@ -2,23 +2,26 @@ package afficheur;
 
 import java.util.Scanner;
 
-public class Afficheur {
+public class Afficheur implements Iafficheur{
 
 	private Scanner scan = new Scanner(System.in);
 	private static int NB_CARTE_MAIN = 4;
 	private static int NB_JOUEUR_MAX = 2;
-
+	
+	@Override
 	public void lancerJeu() {
 		System.out.println("Début du jeu sur « Les Pirates » !\n\n");
 	}
-
+	
+	@Override
 	public void introduireJeu() {
 		System.out.println("Jack le Borgne et Bill Jambe-de-Bois sont deux pirates souhaitant prendre le \n"
 				+ "commandement du navire à l’etendard noir, « Le Sanguinaire ». L’equipage doit donc les \n"
 				+ "departager par un vote. Chacun des deux rivaux doit ainsi gagner en popularite (ou \n"
 				+ "affaiblir son adversaire) afin de devenir le nouveau capitaine. \n");
 	}
-
+	
+	@Override
 	public void afficherRegles() {
 		System.out.println(
 				"Le Jeu des Pirates est un jeu de societe de cartes dans lequel deux joueurs \n" + "s’affrontent. \n"
@@ -34,7 +37,8 @@ public class Afficheur {
 						+ "\t -Dans sa zone de popularite s’il s’agit d’une carte de popularite, \n"
 						+ "\t -Dans la zone de son adversaire s’il s’agit d’une carte d’attaque. \n");
 	}
-
+	
+	@Override
 	public void afficherCarte(String[] carte) {
 		StringBuilder chaine = new StringBuilder("\t nom : " + carte[0] + " (" + carte[1] + ")" + "\n");
 		chaine.append("\t vie : " + carte[2] + "\n");
@@ -42,7 +46,8 @@ public class Afficheur {
 		chaine.append("\t description : " + carte[4] + "\n\n");
 		System.out.println(chaine);
 	}
-
+	
+	@Override
 	public void afficherPlusieursCartes(String[][] cartes) {
 		System.out.println("---------------------\n");
 		System.out.println("CARTES EN MAIN : \n");
@@ -52,14 +57,16 @@ public class Afficheur {
 		}
 		System.out.println("---------------------\n\n");
 	}
-
+	
+	@Override
 	public void afficherJoueur(String[] joueur) {
 		StringBuilder chaine = new StringBuilder("\t nom : " + joueur[0] + "\n");
 		chaine.append("\t vie : " + joueur[1] + "\n");
 		chaine.append("\t popularité : " + joueur[2] + "\n");
 		System.out.println(chaine);
 	}
-
+	
+	@Override
 	public void afficherAllJoueurs(String[][] joueurs) {
 		System.out.println("---------------------\n");
 		System.out.println("AFFICHAGE DES JOUEURS : \n");
@@ -68,24 +75,28 @@ public class Afficheur {
 		}
 		System.out.println("---------------------\n\n");
 	}
-
+	
+	@Override
 	public String selectionnerNom(int numeroJoueur) {
 		System.out.print("Selectionnez un joueur" + numeroJoueur + " : ");
 		return scan.next();
 	}
-
+	
+	@Override
 	public void piocherCarte(String[] carte, String nomJoueur) {
 		System.out.println(nomJoueur + " pioche une carte : \n");
 		afficherCarte(carte);
 	}
-
+	
+	@Override
 	public void piocherMain(String[][] main, String nomJoueur) {
 		System.out.println(nomJoueur + " pioche une main de " + NB_CARTE_MAIN + " cartes \n");
 		for (int i = 0; i < NB_CARTE_MAIN; i++) {
 			piocherCarte(main[i], nomJoueur);
 		}
 	}
-
+	
+	@Override
 	public int selectionnerCarte() {
 		int numChoix = 0;
 		System.out.println("Sélectionnez le numéro de la carte à afficher : ");
@@ -99,24 +110,22 @@ public class Afficheur {
 		} while (!(numChoix > 0 && numChoix < 6));
 		return numChoix - 1;
 	}
-
+	
+	@Override
 	public void debuterTour(String nom, int nbTour) {
 		System.out.println("--------------Tour : " + nbTour + "--------------\n");
 		System.out.println("C'est au tour de " + nom + " de jouer \n");
 	}
-
+	
+	@Override
 	public void afficherGagnant(String nom) {
 		System.out.println("Felicitation " + nom + " tu gagnes la partie !!! \n");
 	}
 	
-	public void jouerCarte(String[] carte, String nom, boolean zoneAttaque) {
-		String nomZone;
-		if (zoneAttaque)
-			nomZone = "ATTAQUE";
-		else
-			nomZone = "POPULARITE";
+	@Override
+	public void jouerCarte(String[] carte, String nom) {
 
-		System.out.println(nom+" joue une carte dans la zone "+nomZone+" \n");
+		System.out.println(nom+" joue une carte dans la zone "+" \n");
 		afficherCarte(carte);
 	}
 
@@ -269,14 +278,14 @@ public class Afficheur {
 		afficheur.piocherCarte(carte12,joueur1[0]);
 		afficheur.afficherPlusieursCartes(mainJoueur1);
 		choixCarte = afficheur.selectionnerCarte();
-		afficheur.jouerCarte(mainJoueur1[choixCarte],joueur1[0],true);
+		afficheur.jouerCarte(mainJoueur1[choixCarte],joueur1[0]);
 		afficheur.afficherAllJoueurs(joueurs);
 		
 		afficheur.debuterTour(joueur2[0], 2);
 		afficheur.piocherCarte(carte11,joueur2[0]);
 		afficheur.afficherPlusieursCartes(mainJoueur2);
 		choixCarte = afficheur.selectionnerCarte();
-		afficheur.jouerCarte(mainJoueur2[choixCarte],joueur2[0],true);
+		afficheur.jouerCarte(mainJoueur2[choixCarte],joueur2[0]);
 		afficheur.afficherAllJoueurs(joueurs);
 
 		afficheur.afficherGagnant(nomJoueur2);

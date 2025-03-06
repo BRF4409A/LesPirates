@@ -1,15 +1,15 @@
 package jeu;
 
-public class CartePopulation extends Carte{
+public class CarteDiffamation extends Carte{
 	private int population;
-
-	public CartePopulation(String nom,int vie, int population, String description) {
+	
+	public CarteDiffamation(String nom,int vie, int population, String description) {
 		super(nom, vie, description);
 		this.population = population;
 	}
 	
 	public String getType() {
-		return "population";
+		return "diffamation";
 	}
 	
 	public String[] parserCarte() {
@@ -22,5 +22,4 @@ public class CartePopulation extends Carte{
 		
 		return carte;
 	}
-	
 }
