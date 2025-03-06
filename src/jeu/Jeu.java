@@ -9,10 +9,14 @@ public class Jeu {
 	public Carte[] pioche = new Carte[97];
 	public int idexPioche = 0;
 	private static Iafficheur afficheur;
-
+	
+	Joueur joueur1;
+	Joueur joueur2;
 
 	public Jeu (String nom) {
 		this.nom = nom;
+		joueur1 = new Joueur("Jack le Borgne", 5, 0);
+		joueur2 = new Joueur("Bill Jambe-de-Bois", 5, 0);
 	}
 	
 	public static Iafficheur getAfficheur() {
@@ -25,21 +29,31 @@ public class Jeu {
 	
 	public void lancerJeu() {
 		introduire();
+		initialiser();
 	}
 	
 	private void introduire() {
 		afficheur.lancerJeu();
 		afficheur.introduireJeu();
 		afficheur.afficherRegles();
-		Joueur joueur1 = new Joueur("Jack le Borgne", 5, 0);
-		Joueur joueur2 = new Joueur("Bill Jambe-de-Bois", 5, 0);
 		generatePioche();
 		afficheur.afficherJoueur(joueur1.parserJoueur());
 		afficheur.afficherJoueur(joueur2.parserJoueur());
 	}
 	
 	private void initialiser() {
-		
+		joueur1.piocherMain(pioche, idexPioche);
+		idexPioche = idexPioche + 4;
+		afficheur.afficherCarte(joueur1.parserCarte(0));
+		afficheur.afficherCarte(joueur1.parserCarte(1));
+		afficheur.afficherCarte(joueur1.parserCarte(2));
+		afficheur.afficherCarte(joueur1.parserCarte(3));
+		joueur2.piocherMain(pioche, idexPioche);
+		idexPioche = idexPioche + 4;
+		afficheur.afficherCarte(joueur2.parserCarte(0));
+		afficheur.afficherCarte(joueur2.parserCarte(1));
+		afficheur.afficherCarte(joueur2.parserCarte(2));
+		afficheur.afficherCarte(joueur2.parserCarte(3));
 	}
 	
 	private void generatePioche() {
@@ -51,79 +65,79 @@ public class Jeu {
 		carte0[1] = "attaque";
 		carte0[2] = "1";
 		carte0[3] = "0";
-		carte0[4] = "retire 1 point de vie à l'adversaire";
+		carte0[4] = "retire 1 point de vie ï¿½ l'adversaire";
 		String[] carte1 = new String[5];
-		carte1[0] = "ÉPÉE ARDENTE";
+		carte1[0] = "ï¿½Pï¿½E ARDENTE";
 		carte1[1] = "attaque";
 		carte1[2] = "2";
 		carte1[3] = "0";
-		carte1[4] = "retire 2 points de vie à l'adversaire";
+		carte1[4] = "retire 2 points de vie ï¿½ l'adversaire";
 		String[] carte2 = new String[5];
 		carte2[0] = "COUP DE CROCHET";
 		carte2[1] = "attaque";
 		carte2[2] = "3";
 		carte2[3] = "0";
-		carte2[4] = "retire 3 points de vie à l'adversaire";
+		carte2[4] = "retire 3 points de vie ï¿½ l'adversaire";
 		String[] carte3 = new String[5];
 		carte3[0] = "COUP DE BOUTEILLE";
 		carte3[1] = "attaque";
 		carte3[2] = "2";
 		carte3[3] = "0";
-		carte3[4] = "retire 2 points de vie à l'adversaire";
+		carte3[4] = "retire 2 points de vie ï¿½ l'adversaire";
 		String[] carte4 = new String[5];
 		carte4[0] = "LANCER DE DAGUE";
 		carte4[1] = "attaque";
 		carte4[2] = "1";
 		carte4[3] = "0";
-		carte4[4] = "retire 1 point de vie à l'adversaire";
+		carte4[4] = "retire 1 point de vie ï¿½ l'adversaire";
 		String[] carte5 = new String[5];
 		carte5[0] = "PROVOCATION BRUTALE";
 		carte5[1] = "attaque";
 		carte5[2] = "2";
 		carte5[3] = "0";
-		carte5[4] = "retire 2 points de vie à l'adversaire";
+		carte5[4] = "retire 2 points de vie ï¿½ l'adversaire";
 		String[] carte6 = new String[5];
-		carte6[0] = "DÉFI SANGLANT";
+		carte6[0] = "Dï¿½FI SANGLANT";
 		carte6[1] = "attaque";
 		carte6[2] = "3";
 		carte6[3] = "0";
-		carte6[4] = "retire 3 points de vie à l'adversaire";
+		carte6[4] = "retire 3 points de vie ï¿½ l'adversaire";
 
 		String[] carte7 = new String[5];
-		carte7[0] = "DISCOURS SINCÈRE";
-		carte7[1] = "popularité";
+		carte7[0] = "DISCOURS SINCï¿½RE";
+		carte7[1] = "popularitï¿½";
 		carte7[2] = "0";
 		carte7[3] = "2";
-		carte7[4] = "ajoute 2 points de popularité à l'utilisateur";
+		carte7[4] = "ajoute 2 points de popularitï¿½ ï¿½ l'utilisateur";
 		String[] carte8 = new String[5];
 		carte8[0] = "DISCOURS BRUTAL";
-		carte8[1] = "popularité";
+		carte8[1] = "popularitï¿½";
 		carte8[2] = "-1";
 		carte8[3] = "3";
-		carte8[4] = "ajoute 3 points de popularité à l'utilisateur mais lui retire 1 point de vie";
+		carte8[4] = "ajoute 3 points de popularitï¿½ ï¿½ l'utilisateur mais lui retire 1 point de vie";
 		String[] carte9 = new String[5];
 		carte9[0] = "CHANT DE PIRATE";
-		carte9[1] = "popularité";
+		carte9[1] = "popularitï¿½";
 		carte9[2] = "0";
 		carte9[3] = "2";
-		carte9[4] = "ajoute 2 points de popularité à l'utilisateur";
+		carte9[4] = "ajoute 2 points de popularitï¿½ ï¿½ l'utilisateur";
 		String[] carte10 = new String[5];
 		carte10[0] = "TRAHISON MALICIEUSE";
-		carte10[1] = "popularité";
+		carte10[1] = "popularitï¿½";
 		carte10[2] = "-2";
 		carte10[3] = "4";
-		carte10[4] = "ajoute 4 points de popularité à l'utilisateur mais lui retire 2 points de vie";
+		carte10[4] = "ajoute 4 points de popularitï¿½ ï¿½ l'utilisateur mais lui retire 2 points de vie";
 		String[] carte11 = new String[5];
 		carte11[0] = "SERMENT DE FRATERNITE";
-		carte11[1] = "popularité";
+		carte11[1] = "popularitï¿½";
 		carte11[2] = "0";
 		carte11[3] = "3";
-		carte11[4] = "ajoute 3 points de popularité à l'utilisateur";
+		carte11[4] = "ajoute 3 points de popularitï¿½ ï¿½ l'utilisateur";
 		String[] carte12 = new String[5];
-		carte12[0] = "DISCOURS ENFLAMMÉ";
-		carte12[1] = "popularité";
+		carte12[0] = "DISCOURS ENFLAMMï¿½";
+		carte12[1] = "popularitï¿½";
 		carte12[2] = "0";
 		carte12[3] = "2";
-		carte12[4] = "ajoute 2 points de popularité à l'utilisateur";
+		carte12[4] = "ajoute 2 points de popularitï¿½ ï¿½ l'utilisateur";
 	}
 }

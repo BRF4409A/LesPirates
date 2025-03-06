@@ -7,7 +7,6 @@ public class Joueur {
 	public Carte[] main = new Carte[5];
 	
 	
-	
 	public Joueur(String nom, int vie, int popularite) {
 		this.nom = nom;
 		this.vie = vie;
@@ -23,6 +22,11 @@ public class Joueur {
 		return joueur;
 	}
 	
+	public String[] parserCarte(int numCarte) {
+
+		return main[numCarte].parserCarte();
+	}
+	
 	public String getNom() {
 		return nom;
 	}
@@ -35,16 +39,14 @@ public class Joueur {
 	
 	public Carte piocherCarte(Carte[] pioche, int index) {
 		Carte carte = pioche[index];
-		index = index + 1;
-		
 		return carte;
 	}
 	
-	public Carte piocherMain(Carte[] pioche, int index) {
-		Carte carte = pioche[index];
-		index = index + 1;
-		
-		return carte;
+	public void piocherMain(Carte[] pioche, int index) {
+		main[0] = piocherCarte(pioche, index);
+		main[1] = piocherCarte(pioche, index+1);
+		main[2] = piocherCarte(pioche, index+2);
+		main[3] = piocherCarte(pioche, index+3);
 	}
 	
 	
