@@ -6,6 +6,7 @@ public class CarteFinale extends CarteAttaque{
 		super(nom, vie, description);
 	}
 	
+	@Override
 	public String getType() {
 		return "finale";
 	}

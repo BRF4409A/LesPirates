@@ -35,18 +35,27 @@ public class Afficheur implements Iafficheur{
 						+ "-Au debut de son tour, le pirate pioche une carte et l’ajoute à sa main. \n"
 						+ "Il choisit ensuite parmi sa main, composee de cinq cartes, une carte qu’il depose : \n"
 						+ "\t -Dans sa zone de popularite s’il s’agit d’une carte de popularite, \n"
-						+ "\t -Dans la zone de son adversaire s’il s’agit d’une carte d’attaque. \n");
+						+ "\t -Dans la zone de son adversaire s’il s’agit d’une carte d’attaque. \n\n\n"
+						+ "Voici les deux joueurs : \n");
 	}
 	
 	@Override
-	public void afficherCarte(String[] carte) {
-		StringBuilder chaine = new StringBuilder("\t nom : " + carte[0] + " (" + carte[1] + ")" + "\n");
-		chaine.append("\t vie : " + carte[2] + "\n");
-		chaine.append("\t popularité : " + carte[3] + "\n");
-		chaine.append("\t description : " + carte[4] + "\n\n");
+	public void afficherCarteVie(String nom, String type, int vie, String description) {
+		StringBuilder chaine = new StringBuilder("\t nom : " + nom + " (" + type + ")" + "\n");
+		chaine.append("\t vie : " + vie + "\n");
+		chaine.append("\t description : " + description + "\n\n");
 		System.out.println(chaine);
 	}
 	
+	@Override
+	public void afficherCartePopularite(String nom, String type, int popularite, String description) {
+		StringBuilder chaine = new StringBuilder("\t nom : " + nom + " (" + type + ")" + "\n");
+		chaine.append("\t popularité : " + popularite + "\n");
+		chaine.append("\t description : " + description + "\n\n");
+		System.out.println(chaine);
+	}
+	
+	/*
 	@Override
 	public void afficherPlusieursCartes(String[][] cartes) {
 		System.out.println("---------------------\n");
@@ -57,15 +66,17 @@ public class Afficheur implements Iafficheur{
 		}
 		System.out.println("---------------------\n\n");
 	}
+	*/
 	
 	@Override
-	public void afficherJoueur(String[] joueur) {
-		StringBuilder chaine = new StringBuilder("\t nom : " + joueur[0] + "\n");
-		chaine.append("\t vie : " + joueur[1] + "\n");
-		chaine.append("\t popularité : " + joueur[2] + "\n");
+	public void afficherJoueur(String nom, int vie, int popularite) {
+		StringBuilder chaine = new StringBuilder(nom + ": \n");
+		chaine.append("\t Vie : " + vie + "\n");
+		chaine.append("\t Popularité : " + popularite + "\n");
 		System.out.println(chaine);
 	}
 	
+	/*
 	@Override
 	public void afficherAllJoueurs(String[][] joueurs) {
 		System.out.println("---------------------\n");
@@ -75,6 +86,7 @@ public class Afficheur implements Iafficheur{
 		}
 		System.out.println("---------------------\n\n");
 	}
+	*/
 	
 	@Override
 	public String selectionnerNom(int numeroJoueur) {
@@ -83,11 +95,11 @@ public class Afficheur implements Iafficheur{
 	}
 	
 	@Override
-	public void piocherCarte(String[] carte, String nomJoueur) {
+	public void piocherCarte(String nomJoueur) {
 		System.out.println(nomJoueur + " pioche une carte : \n");
-		afficherCarte(carte);
 	}
 	
+	/*
 	@Override
 	public void piocherMain(String[][] main, String nomJoueur) {
 		System.out.println(nomJoueur + " pioche une main de " + NB_CARTE_MAIN + " cartes \n");
@@ -95,6 +107,7 @@ public class Afficheur implements Iafficheur{
 			piocherCarte(main[i], nomJoueur);
 		}
 	}
+	*/
 	
 	@Override
 	public int selectionnerCarte() {
@@ -123,12 +136,11 @@ public class Afficheur implements Iafficheur{
 	}
 	
 	@Override
-	public void jouerCarte(String[] carte, String nom) {
-
-		System.out.println(nom+" joue une carte dans la zone "+" \n");
-		afficherCarte(carte);
+	public void jouerCarte(String nomJoueur) {
+		System.out.println(nomJoueur+" joue une carte dans la zone "+" \n");
 	}
 
+	
 	public static void main(String[] args) {
 
 		String[] carte0 = new String[5];
@@ -211,33 +223,6 @@ public class Afficheur implements Iafficheur{
 		carte12[3] = "2";
 		carte12[4] = "ajoute 2 points de popularité à l'utilisateur";
 		
-		/*
-		String[][] data = { { "ATTAQUE SURPRISE", "1", "0", "retire 1 point de vie à l'adversaire" },
-				{ "ÉPÉE ARDENTE", "2", "0", "retire 2 points de vie à l'adversaire" },
-				{ "COUP DE CROCHET", "3", "0", "retire 3 points de vie à l'adversaire" },
-				{ "COUP DE BOUTEILLE", "2", "0", "retire 2 points de vie à l'adversaire" },
-				{ "LANCER DE DAGUE", "1", "0", "retire 1 point de vie à l'adversaire" },
-				{ "PROVOCATION BRUTALE", "2", "0", "retire 2 points de vie à l'adversaire" },
-				{ "DÉFI SANGLANT", "3", "0", "retire 3 points de vie à l'adversaire" },
-				{ "DISCOURS SINCERE", "0", "2", "ajoute 2 points de popularité à l'utilisateur" },
-				{ "DISCOURS BRUTAL", "-1", "3",
-						"ajoute 3 points de popularité à l'utilisateur mais lui retire 1 point de vie" },
-				{ "CHANT DE PIRATE", "0", "2", "ajoute 2 points de popularité à l'utilisateur" },
-				{ "TRAHISON MALICIEUSE", "-2", "4",
-						"ajoute 4 points de popularité à l'utilisateur mais lui retire 2 points de vie" },
-				{ "SERMENT DE FRATERNITE", "0", "3", "ajoute 3 points de popularité à l'utilisateur" },
-				{ "DISCOURS ENFLAMME", "0", "2", "ajoute 2 points de popularité à l'utilisateur" } };
-
-		
-		 int lengthCartes = data.length; String[][] cartes = new
-		 String[lengthCartes][4]; for (int i = 0; i < lengthCartes; i++) { for (int j
-		 = 0; j < NB_CARTE_MAIN; j++) { cartes[i][j] = data[i][j]; } }
-		 
-		 String[][] cartes1 = new String[NB_CARTE_MAIN][4]; String[][] cartes2 = new
-		 String[NB_CARTE_MAIN][4]; for(int i=0;i<NB_CARTE_MAIN;i++) { for(int
-		 j=0;j<4;j++) { cartes1[i][j]=cartes[i][j];
-		 cartes2[i][j]=cartes[lengthCartes-1-i][j]; } }
-		*/
 		
 		String nomJoueur1="Jack le Borgne";
 		String nomJoueur2="Bill Jambe-de-Bois";
@@ -261,7 +246,7 @@ public class Afficheur implements Iafficheur{
 		mainJoueur2[1] = carte3;
 		mainJoueur2[2] = carte9;
 		mainJoueur2[3] = carte10;
-				
+		/*		
 				
 		int choixCarte;
 		
@@ -289,5 +274,7 @@ public class Afficheur implements Iafficheur{
 		afficheur.afficherAllJoueurs(joueurs);
 
 		afficheur.afficherGagnant(nomJoueur2);
+		*/
 	}
 }
+

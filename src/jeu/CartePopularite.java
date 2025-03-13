@@ -1,10 +1,11 @@
 package jeu;
 
-public class CarteDiffamation extends Carte{
+public class CartePopularite extends Carte{
 	private int population;
-	
-	public CarteDiffamation(String nom, int population, String description) {
+
+	public CartePopularite(String nom, int population, String description) {
 		super(nom, description);
+		this.population = population;
 	}
 	
 	@Override
@@ -14,6 +15,7 @@ public class CarteDiffamation extends Carte{
 	
 	@Override
 	public String getType() {
-		return "diffamation";
+		return "population";
 	}
+	
 }

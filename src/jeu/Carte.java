@@ -1,47 +1,42 @@
 package jeu;
 
-public class Carte {
+import afficheur.Iafficheur;
+
+abstract public class Carte {
 	protected String nom;
 	protected String type;
 	protected String description;
-	protected int vie;
+	
+	protected static Iafficheur afficheur;
 
-	protected Carte(String nom, int vie, String description) {
+	protected Carte(String nom, String description) {
 
 		this.nom = nom;
 		this.description = description;
-		this.vie = vie;
+	}
+	
+	public String getNom() {
+		return nom;
 	}
 
-	public String getType() {
-		return "random";
+	protected abstract String getType();
+	
+	public String getDescription() {
+		return description;
 	}
-
-	// public String getInfo() {
-
-	// protected abstract Carte piocherCarte();
-
-	// protected abstract Carte[] piocherDesCartes(int nbCarte);
-
+	
+	protected abstract void afficherCarte();
+	
+	/*
 	public String[] parserCarte() {
 		String[] carte = new String[5];
 		carte[0] = nom;
 		carte[1] = getType();
-		carte[2] = String.valueOf(vie);
+		carte[2] = null;
 		carte[3] = "0";
 		carte[4] = description;
 
 		return carte;
 	}
-
-	/*
-	 * public String[][] parserDesCartes(){
-	 * 
-	 * String[][] carte = new String[5][5]; carte[0] = nom; carte[1] = type;
-	 * carte[2] = String.valueOf(vie); carte[3] = "0"; carte[4] = description;
-	 * 
-	 * return carte; }
-	 */
-
-	// protected abstract Carte choisirCartes(int choix);
+	*/
 }

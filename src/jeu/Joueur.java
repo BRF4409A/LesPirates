@@ -1,10 +1,14 @@
 package jeu;
 
+import afficheur.Iafficheur;
+
 public class Joueur {
-	public String nom;
-	public int vie;
-	public int popularite;
-	public Carte[] main = new Carte[5];
+	private String nom;
+	private int vie;
+	private int popularite;
+	private Carte[] main = new Carte[5];
+	
+	private static Iafficheur afficheur;
 	
 	
 	public Joueur(String nom, int vie, int popularite) {
@@ -22,11 +26,6 @@ public class Joueur {
 		return joueur;
 	}
 	
-	public String[] parserCarte(int numCarte) {
-
-		return main[numCarte].parserCarte();
-	}
-	
 	public String getNom() {
 		return nom;
 	}
@@ -38,8 +37,8 @@ public class Joueur {
 	}
 	
 	public Carte piocherCarte(Carte[] pioche, int index) {
-		Carte carte = pioche[index];
-		return carte;
+		pioche[index].afficherCarte();
+		return pioche[index];
 	}
 	
 	public void piocherMain(Carte[] pioche, int index) {
@@ -47,6 +46,11 @@ public class Joueur {
 		main[1] = piocherCarte(pioche, index+1);
 		main[2] = piocherCarte(pioche, index+2);
 		main[3] = piocherCarte(pioche, index+3);
+		
+		main[0].afficherCarte();
+		main[1].afficherCarte();
+		main[2].afficherCarte();
+		main[3].afficherCarte();
 	}
 	
 	
