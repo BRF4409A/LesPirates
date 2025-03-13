@@ -1,13 +1,14 @@
 package jeu;
 
+import afficheur.Afficheur;
 import afficheur.Iafficheur;
 
-abstract public class Carte {
+abstract class Carte {
 	protected String nom;
 	protected String type;
 	protected String description;
 	
-	protected static Iafficheur afficheur;
+	protected static Iafficheur afficheur = new Afficheur();
 
 	protected Carte(String nom, String description) {
 
@@ -26,17 +27,4 @@ abstract public class Carte {
 	}
 	
 	protected abstract void afficherCarte();
-	
-	/*
-	public String[] parserCarte() {
-		String[] carte = new String[5];
-		carte[0] = nom;
-		carte[1] = getType();
-		carte[2] = null;
-		carte[3] = "0";
-		carte[4] = description;
-
-		return carte;
-	}
-	*/
 }

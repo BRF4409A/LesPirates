@@ -26,28 +26,22 @@ public class Jeu {
 	}
 	
 	public void lancerJeu() {
-		introduire();
 		initialiser();
 	}
 	
-	private void introduire() {
+	private void initialiser() {
 		afficheur.lancerJeu();
 		afficheur.introduireJeu();
 		afficheur.afficherRegles();
-		generatePioche();
+		pioche.melangerPioche();
 		afficheur.afficherJoueur(joueur1.getNom(), joueur1.getVie(), joueur1.getPopularite());
 		afficheur.afficherJoueur(joueur2.getNom(), joueur2.getVie(), joueur2.getPopularite());
+		joueur1.piocherMain(pioche);
+		afficheur.piocherCarte(joueur2.getNom());
+		joueur2.piocherMain(pioche);
 	}
 	
-	private void initialiser() {
-		joueur1.piocherMain(pioche, idexPioche);
-		idexPioche = idexPioche + 4;
-
-		joueur2.piocherMain(pioche, idexPioche);
-		idexPioche = idexPioche + 4;
-	}
-	
-	private void generatePioche() {
-		//TODO
+	private void demarrerTour() {
+		joueur1.piocherCarte(pioche);
 	}
 }

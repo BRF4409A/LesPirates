@@ -1,15 +1,16 @@
 package jeu;
 
 public class CarteDiffamation extends Carte{
-	private int population;
+	private int popularite;
 	
-	public CarteDiffamation(String nom, int population, String description) {
+	public CarteDiffamation(String nom, int popularite, String description) {
 		super(nom, description);
+		this.popularite = popularite;
 	}
 	
 	@Override
 	public void afficherCarte() {
-		afficheur.afficherCarteVie(nom, getType(), population, description);
+		afficheur.afficherCartePopularite(nom, getType(), popularite, description);
 	}
 	
 	@Override

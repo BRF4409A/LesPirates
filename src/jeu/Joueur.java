@@ -17,15 +17,6 @@ public class Joueur {
 		this.popularite = popularite;
 	}
 	
-	public String[] parserJoueur() {
-		String[] joueur = new String[3];
-		joueur[0] = nom;
-		joueur[1] = String.valueOf(vie);
-		joueur[2] = String.valueOf(popularite);
-
-		return joueur;
-	}
-	
 	public String getNom() {
 		return nom;
 	}
@@ -36,16 +27,19 @@ public class Joueur {
 		return popularite;
 	}
 	
-	public Carte piocherCarte(Carte[] pioche, int index) {
-		pioche[index].afficherCarte();
-		return pioche[index];
+	public Carte piocherCarte(Pioche pioche) {
+		Carte carte = pioche.piocherCarte();
+		afficheur.piocherCarte(nom);
+		carte.afficherCarte();
+		
+		return carte;
 	}
 	
-	public void piocherMain(Carte[] pioche, int index) {
-		main[0] = piocherCarte(pioche, index);
-		main[1] = piocherCarte(pioche, index+1);
-		main[2] = piocherCarte(pioche, index+2);
-		main[3] = piocherCarte(pioche, index+3);
+	public void piocherMain(Pioche pioche) {
+		main[0] = pioche.piocherCarte();
+		main[1] = pioche.piocherCarte();
+		main[2] = pioche.piocherCarte();
+		main[3] = pioche.piocherCarte();
 		
 		main[0].afficherCarte();
 		main[1].afficherCarte();
