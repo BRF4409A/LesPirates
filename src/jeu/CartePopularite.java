@@ -18,4 +18,9 @@ public class CartePopularite extends Carte{
 		return "population";
 	}
 	
+	@Override
+	public void actionCarte(Joueur joueur, Joueur adversaire, int index) {
+		joueur.modifPopularite(popularite);
+	}
+	
 }

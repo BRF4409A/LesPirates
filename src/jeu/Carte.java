@@ -11,7 +11,6 @@ abstract class Carte {
 	protected static Iafficheur afficheur = new Afficheur();
 
 	protected Carte(String nom, String description) {
-
 		this.nom = nom;
 		this.description = description;
 	}
@@ -27,4 +26,6 @@ abstract class Carte {
 	}
 	
 	protected abstract void afficherCarte();
+	
+	protected abstract void actionCarte(Joueur joueur, Joueur adversaire, int index);
 }

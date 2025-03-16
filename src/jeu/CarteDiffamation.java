@@ -17,4 +17,9 @@ public class CarteDiffamation extends Carte{
 	public String getType() {
 		return "diffamation";
 	}
+	
+	@Override
+	public void actionCarte(Joueur joueur, Joueur adversaire, int index) {
+		adversaire.modifPopularite(-popularite);
+	}
 }

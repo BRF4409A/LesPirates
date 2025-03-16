@@ -1,20 +1,19 @@
 package jeu;
 
 import afficheur.Iafficheur;
-import jeu.Joueur;
 
 public class Jeu {
-	public String nom;
-	public Pioche pioche = new Pioche();
+	private String nom;
+	private Pioche pioche = new Pioche();
 	private static Iafficheur afficheur;
-	
-	Joueur joueur1;
-	Joueur joueur2;
+	private Joueur joueur;
+	private Joueur adversaire;
+	private int nbTour = 0;
 
 	public Jeu (String nom) {
 		this.nom = nom;
-		joueur1 = new Joueur("Jack le Borgne", 5, 0);
-		joueur2 = new Joueur("Bill Jambe-de-Bois", 5, 0);
+		joueur = new Joueur("Jack le Borgne", 3, 0);
+		adversaire = new Joueur("Bill Jambe-de-Bois", 3, 0);
 	}
 	
 	public static Iafficheur getAfficheur() {
@@ -27,21 +26,54 @@ public class Jeu {
 	
 	public void lancerJeu() {
 		initialiser();
+		joueur = jouerPartie();
+		afficheur.afficherGagnant(joueur.getNom());
 	}
 	
 	private void initialiser() {
-		afficheur.lancerJeu();
+		afficheur.lancerJeu(nom);
 		afficheur.introduireJeu();
 		afficheur.afficherRegles();
 		pioche.melangerPioche();
-		afficheur.afficherJoueur(joueur1.getNom(), joueur1.getVie(), joueur1.getPopularite());
-		afficheur.afficherJoueur(joueur2.getNom(), joueur2.getVie(), joueur2.getPopularite());
-		joueur1.piocherMain(pioche);
-		afficheur.piocherCarte(joueur2.getNom());
-		joueur2.piocherMain(pioche);
+		afficheur.afficherJoueur(joueur.getNom(), joueur.getVie(), joueur.getPopularite());
+		afficheur.afficherJoueur(adversaire.getNom(), adversaire.getVie(), adversaire.getPopularite());
+		joueur.piocherMain(pioche);
+		adversaire.piocherMain(pioche);
 	}
 	
-	private void demarrerTour() {
-		joueur1.piocherCarte(pioche);
+	private int realiserTour(int idCarteJouee) {
+		nbTour++;
+		afficheur.debuterTour(joueur.getNom(), nbTour);
+		joueur.piocherCarte(pioche, idCarteJouee);
+		afficheur.afficherMain();
+		joueur.afficherMain();
+		idCarteJouee = afficheur.selectionnerCarte();
+		afficheur.jouerCarte(joueur.getNom(), idCarteJouee);
+		joueur.jouerCarte(idCarteJouee, adversaire);
+		afficheur.afficherJoueur(joueur.getNom(), joueur.getVie(), joueur.getPopularite());
+		afficheur.afficherJoueur(adversaire.getNom(), adversaire.getVie(), adversaire.getPopularite());
+		return idCarteJouee;
+	}
+	
+	private Joueur jouerPartie() {
+		int idJoueur1 = 4;
+		int idJoueur2 = 4;
+		boolean unJoueur = true;
+		Joueur joueurTemp;
+		do{
+			if (unJoueur) {
+				unJoueur = false;
+				idJoueur1 = realiserTour(idJoueur1);
+			}else {
+				unJoueur = true;
+				idJoueur2 = realiserTour(idJoueur2);
+			}
+			
+			joueurTemp = joueur;
+			joueur = adversaire;
+			adversaire = joueurTemp;
+			
+		}while(!joueur.verifierVictoire(joueur));
+		return joueur;
 	}
 }

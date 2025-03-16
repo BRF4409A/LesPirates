@@ -17,4 +17,9 @@ public class CarteSoin extends Carte {
 	public String getType() {
 		return "soin";
 	}
+	
+	@Override
+	public void actionCarte(Joueur joueur, Joueur adversaire, int index) {
+		joueur.modifVie(vie);
+	}
 }
