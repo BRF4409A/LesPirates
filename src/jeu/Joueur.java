@@ -34,7 +34,7 @@ public class Joueur {
 	public void modifPopularite(int modif) {
 		popularite = popularite + modif;
 		if (popularite>5) {popularite = 5;}
-		else if(popularite<3) {popularite = 0;}
+		else if(popularite<0) {popularite = 0;}
 	}
 	
 	public void modifVie(int modif) {
