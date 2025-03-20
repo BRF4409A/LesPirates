@@ -1,0 +1,173 @@
+classDiagram
+class Afficheur {
+  - afficheur : package
+  + Scanner() : new
+  + lancerJeu() : void
+  + introduireJeu() : void
+  + afficherRegles() : void
+  + afficherCarteVie() : void
+  + StringBuilder() : new
+  + afficherCartePopularite() : void
+  + StringBuilder() : new
+  + afficherCarteCopie() : void
+  + StringBuilder() : new
+  + afficherMain() : void
+  + voirMainAdversaire() : void
+  + afficherJoueur() : void
+  + StringBuilder() : new
+  + selectionnerNom() : String
+  + piocherCarte() : void
+  + piocherMain() : void
+  + selectionnerCarte() : int
+  + StringBuilder() : new
+  + debuterTour() : void
+  + afficherGagnant() : void
+  + jouerCarte() : void
+}
+class Senario {
+  - execution : package
+  + main() : void
+  + Afficheur() : new
+  + Jeu() : new
+}
+class Carte {
+  - jeu : package
+  - nom : String
+  - type : String
+  - description : String
+  - nom : return
+  - description : return
+  + Afficheur() : new
+  + Carte() : protected
+  + getNom() : String
+  + getType() : String
+  + getDescription() : String
+  + afficherCarte() : void
+  + actionCarte() : void
+}
+class CarteAttaque {
+  - jeu : package
+  - vie : int
+  + CarteAttaque() : public
+  + afficherCarte() : void
+  + getType() : String
+  + actionCarte() : void
+}
+Carte <|-- CarteAttaque
+class CarteCopier {
+  - jeu : package
+  - idCarte : int
+  - carteAdversaire : Carte
+  + CarteCopier() : public
+  + afficherCarte() : void
+  + getType() : String
+  + actionCarte() : void
+}
+Carte <|-- CarteCopier
+class CarteDiffamation {
+  - jeu : package
+  - popularite : int
+  + CarteDiffamation() : public
+  + afficherCarte() : void
+  + getType() : String
+  + actionCarte() : void
+}
+Carte <|-- CarteDiffamation
+class CarteFinale {
+  - jeu : package
+  + CarteFinale() : public
+  + getType() : String
+}
+CarteAttaque <|-- CarteFinale
+class CartePopularite {
+  - jeu : package
+  - popularite : int
+  + CartePopularite() : public
+  + afficherCarte() : void
+  + getType() : String
+  + actionCarte() : void
+}
+Carte <|-- CartePopularite
+class CarteSoin {
+  - jeu : package
+  - vie : int
+  + CarteSoin() : public
+  + afficherCarte() : void
+  + getType() : String
+  + actionCarte() : void
+}
+Carte <|-- CarteSoin
+class Jeu {
+  - jeu : package
+  - nom : String
+  - afficheur : Iafficheur
+  - joueur : Joueur
+  - adversaire : Joueur
+  - afficheur : return
+  - idCarteJouee : return
+  - joueurTemp : Joueur
+  - joueur : return
+  + Pioche() : new
+  + Joueur() : new
+  + Joueur() : new
+  + getAfficheur() : Iafficheur
+  + setAfficheur() : void
+  + lancerJeu() : void
+  + initialiser() : void
+  + realiserTour() : int
+  + jouerPartie() : Joueur
+}
+class Joueur {
+  - jeu : package
+  - nom : String
+  - vie : int
+  - popularite : int
+  - nom : return
+  - vie : return
+  - popularite : return
+  + Afficheur() : new
+  + Joueur() : public
+  + getNom() : String
+  + getVie() : int
+  + getPopularite() : int
+  + getCarte() : Carte
+  + modifPopularite() : void
+  + if() : else
+  + modifVie() : void
+  + if() : else
+  + piocherCarte() : void
+  + afficherCarte() : void
+  + afficherMain() : void
+  + piocherMain() : void
+  + jouerCarte() : void
+  + verifierVictoire() : boolean
+  + echangerCarte() : void
+}
+class Pioche {
+  - jeu : package
+  - random : SecureRandom
+  - randomIndex : int
+  - carteTempo : Carte
+  - carte : return
+  + Pioche() : public
+  + CarteFinale() : new
+  + CarteAttaque() : new
+  + CarteAttaque() : new
+  + CarteAttaque() : new
+  + CarteAttaque() : new
+  + CartePopularite() : new
+  + CartePopularite() : new
+  + CartePopularite() : new
+  + CartePopularite() : new
+  + CarteDiffamation() : new
+  + CarteDiffamation() : new
+  + CarteDiffamation() : new
+  + CarteDiffamation() : new
+  + CarteSoin() : new
+  + CarteSoin() : new
+  + CarteSoin() : new
+  + CarteSoin() : new
+  + CarteCopier() : new
+  + melangerPioche() : void
+  + piocherCarte() : Carte
+}
